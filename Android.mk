@@ -108,26 +108,3 @@ LOCAL_C_INCLUDES := $(KERNEL_HEADERS)
 LOCAL_CFLAGS := 
 LOCAL_SHARED_LIBRARIES := libcutils
 include $(BUILD_EXECUTABLE)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE:= libminivold
-LOCAL_SRC_FILES := $(common_src_files)
-LOCAL_C_INCLUDES := $(common_c_includes)
-LOCAL_CFLAGS := $(common_cflags) -DMINIVOLD -DHELPER_PATH=\"/sbin/\"
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE:= minivold
-LOCAL_SRC_FILES := vold.c
-LOCAL_C_INCLUDES := $(common_c_includes)
-LOCAL_CFLAGS := $(common_cflags) -DMINIVOLD
-LOCAL_STATIC_LIBRARIES := libminivold
-LOCAL_STATIC_LIBRARIES += libc libstdc++
-LOCAL_STATIC_LIBRARIES += $(common_libraries) $(common_static_libraries)
-LOCAL_STATIC_LIBRARIES += libcrypto_static libext2_uuid libvold
-LOCAL_FORCE_STATIC_EXECUTABLE := true
-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_EXECUTABLE)
